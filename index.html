@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#102a22">
+  <title>iTaoBuy spreadsheet | Product Finds, QC &amp; Shipping Guide</title>
+  <meta name="description" content="Browse the iTaoBuy spreadsheet with real HipobuyFind listings, searchable item IDs, CNY and USD price references, and a checklist for sizing, QC and shipping.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="iTaoBuy spreadsheet | Product Finds, QC &amp; Shipping Guide">
+  <meta property="og:description" content="Find shoes, hoodies, tees and jackets. Compare reference prices and check what to verify before placing an agent order.">
+  <!--
+    File: index.html
+    Search research: https://www.itaobuysheets.com/ emphasizes QC photos and category browsing.
+    https://itaobuy-spreadsheet.net/shoes/ emphasizes ID search and price filters.
+    This page adds a single searchable catalog snapshot, transparent source pricing,
+    and a checklist for comparing sizes, warehouse photos and total costs.
+    Exact Google first-page positions were not independently verified.
+    Catalog source: https://hipobuyfind.com/
+    Indexing status: not submitted. After publication, add a self-referencing canonical
+    using the actual public URL. Request indexing for that URL in its verified property
+    in Google Search Console (https://search.google.com/search-console/) and Bing
+    Webmaster Tools (https://www.bing.com/webmasters/).
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "iTaoBuy spreadsheet",
+    "inLanguage": "en",
+    "description": "An independent product shortlist with HipobuyFind catalog entries, price references and a shopping-agent checklist.",
+    "isBasedOn": "https://hipobuyfind.com/"
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #152c24;
+      --muted: #475e54;
+      --green: #145840;
+      --line: #d7e3dc;
+      --paper: #f4f7f2;
+      --white: #fff;
+      font: 16px/1.6 Inter, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; color: var(--ink); background: var(--paper); }
+    a { color: var(--green); text-underline-offset: .2em; }
+    :focus-visible { outline: 3px solid #ba601a; outline-offset: 4px; }
+    .wrap { width: min(1120px, calc(100% - 2rem)); margin-inline: auto; }
+    header, footer { padding: 1rem 0; }
+    nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; }
+    nav div { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
+    nav a { text-decoration: none; font-weight: 650; }
+    nav a:hover { text-decoration: underline; }
+    .hero {
+      padding: clamp(3rem, 9vw, 7rem) 1.25rem;
+      border-radius: 1.5rem;
+      background: radial-gradient(ellipse at 78% 7%, #28654d, transparent 58%), #102a22;
+      color: var(--white);
+      text-align: center;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(2.5rem, 8vw, 5.7rem); line-height: 1.02; letter-spacing: -.065em; margin-bottom: 1rem; }
+    h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.13; letter-spacing: -.035em; margin-bottom: .6rem; }
+    h3 { line-height: 1.25; margin-bottom: .5rem; }
+    .hero p { max-width: 56ch; margin: 0 auto 1.6rem; color: #e0eee6; }
+    .hero small { display: block; margin-top: .9rem; color: #e0eee6; }
+    .actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+    .button {
+      display: inline-flex; min-height: 44px; align-items: center; justify-content: center;
+      padding: .6rem 1.1rem; border: 1px solid transparent; border-radius: .65rem;
+      background: #d9fac9; color: #142e21; font-weight: 750; text-decoration: none;
+    }
+    .button.alt { background: transparent; border-color: #aac7b8; color: var(--white); }
+    .button:hover { text-decoration: underline; }
+    section + section { margin-top: clamp(2.5rem, 7vw, 5rem); }
+    .intro { max-width: 70ch; color: var(--muted); }
+    .filters { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.2rem 0 .6rem; }
+    .filters label { font-weight: 650; }
+    .filters label:first-child { flex: 1 1 16rem; }
+    .filters label:not(:first-child) { flex: 1 1 10rem; }
+    input, select {
+      display: block; width: 100%; min-height: 44px; margin-top: .25rem; padding: .5rem .7rem;
+      border: 1px solid #91a99c; border-radius: .5rem; color: var(--ink); background: var(--white); font: inherit;
+    }
+    .result { min-height: 1.6em; margin-bottom: .45rem; color: var(--muted); }
+    .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: .85rem; background: var(--white); }
+    table { width: 100%; min-width: 575px; border-collapse: collapse; }
+    th, td { text-align: left; padding: .8rem .9rem; border-bottom: 1px solid var(--line); }
+    thead th { background: #e7f1e9; white-space: nowrap; }
+    tbody th { font-weight: 650; }
+    tbody tr:last-child > * { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #f9fbf8; }
+    .price { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .note { margin: .75rem 0 0; font-size: .92rem; color: var(--muted); }
+    .steps { padding-left: 1.35rem; display: grid; gap: .85rem; max-width: 76ch; }
+    .steps li { padding-left: .25rem; }
+    .steps li::marker { color: var(--green); font-weight: 750; }
+    details { border-top: 1px solid var(--line); padding: .85rem 0; }
+    details:last-of-type { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 750; }
+    details p { margin: .6rem 0 0; max-width: 75ch; color: var(--muted); }
+    footer { margin-top: 2.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
+    footer p { margin: 0; }
+  </style>
+<link rel="canonical" href="https://kakobuyfinds.github.io/mxjqi/">
+</head>
+<body>
+  <header class="wrap">
+    <nav aria-label="Page navigation">
+      <a href="#top">iTaoBuy spreadsheet</a>
+      <div>
+        <a href="#catalog">Catalog</a>
+        <a href="#checklist">Buying checklist</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap" id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <h1 id="page-title">iTaoBuy spreadsheet</h1>
+      <p>Shortlist shoes, hoodies, T-shirts and jackets from HipobuyFind. Compare reference prices and see what to check before placing a shopping-agent order.</p>
+      <div class="actions">
+        <a class="button" href="https://hipobuyfind.com/">iTaoBuy spreadsheet</a>
+        <a class="button alt" href="https://hipobuyfind.com/">Buy it now</a>
+      </div>
+      <small>Both buttons open HipobuyFind.</small>
+    </section>
+
+    <section id="catalog" aria-labelledby="catalog-title">
+      <h2 id="catalog-title">HipobuyFind product catalog</h2>
+      <p class="intro" id="catalog-note">These listings come from the public HipobuyFind catalog. Search by name or item ID, then confirm available variants and current pricing at the source. USD figures are approximate item-price references and exclude shipping and fees.</p>
+
+      <div class="filters" id="filters" hidden>
+        <label for="query">Search by name or item ID
+          <input id="query" type="search" placeholder="e.g. hoodie or 154936" autocomplete="off">
+        </label>
+        <label for="category">Category
+          <select id="category">
+            <option value="">All categories</option>
+            <option>Shoes</option>
+            <option>Hoodies</option>
+            <option>T-Shirts</option>
+            <option>Jackets</option>
+          </select>
+        </label>
+        <label for="sort">Sort by
+          <select id="sort">
+            <option value="">Catalog order</option>
+            <option value="asc">Price low to high</option>
+            <option value="desc">Price high to low</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="result" id="result" role="status" hidden></p>
+      <div class="table-wrap" role="region" aria-label="Scrollable product catalog" tabindex="0">
+        <table aria-describedby="catalog-note">
+          <thead>
+            <tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">Item ID</th><th scope="col">CNY</th><th scope="col">Est. USD</th></tr>
+          </thead>
+          <tbody id="products">
+            <tr data-category="Shoes" data-price="350"><th scope="row">Cream Chunky Sneakers with Wide Laces</th><td>Shoes</td><td>148191</td><td class="price">¥350.00</td><td class="price">$48.61</td></tr>
+            <tr data-category="Shoes" data-price="450"><th scope="row">Black Canvas Low-Top Sneakers with Gum Sole</th><td>Shoes</td><td>148188</td><td class="price">¥450.00</td><td class="price">$62.50</td></tr>
+            <tr data-category="Hoodies" data-price="300"><th scope="row">Gray Hooded Hoodie</th><td>Hoodies</td><td>154936</td><td class="price">¥300.00</td><td class="price">$41.67</td></tr>
+            <tr data-category="Hoodies" data-price="170"><th scope="row">Fleece-Lined Hoodie</th><td>Hoodies</td><td>154917</td><td class="price">¥170.00</td><td class="price">$23.61</td></tr>
+            <tr data-category="T-Shirts" data-price="105"><th scope="row">Graphic Short-Sleeve T-Shirt</th><td>T-Shirts</td><td>154920</td><td class="price">¥105.00</td><td class="price">$14.58</td></tr>
+            <tr data-category="T-Shirts" data-price="105"><th scope="row">Short-Sleeve T-Shirt</th><td>T-Shirts</td><td>154919</td><td class="price">¥105.00</td><td class="price">$14.58</td></tr>
+            <tr data-category="Jackets" data-price="157.14"><th scope="row">Hooded Quick-Dry Jacket</th><td>Jackets</td><td>154851</td><td class="price">¥157.14</td><td class="price">$21.83</td></tr>
+            <tr data-category="Jackets" data-price="268"><th scope="row">Lightweight Puffer Jacket</th><td>Jackets</td><td>152572</td><td class="price">¥268.00</td><td class="price">$37.22</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Source: <a href="https://hipobuyfind.com/">HipobuyFind’s public catalog</a>. Use the category and product title to locate the listing, then match the item ID.</p>
+    </section>
+
+    <section id="checklist" aria-labelledby="checklist-title">
+      <h2 id="checklist-title">What to check before you order</h2>
+      <ol class="steps">
+        <li><strong>Verify the listing.</strong> Open the source listing through HipobuyFind and confirm the seller, color, size, stock and current price. Check that your chosen agent accepts the source URL and ships the item to your destination.</li>
+        <li><strong>Compare measurements.</strong> For a hoodie or jacket, lay a garment you already own flat and measure chest width, body length and sleeves. Compare those figures using the seller’s measurement method. For shoes, check whether the chart lists foot length or insole length.</li>
+        <li><strong>Set a delivered budget.</strong> Add the item price, domestic delivery, agent fees, international shipping and any applicable import charges. Ask how the route bills bulky parcels if you are comparing a puffer jacket with lighter items.</li>
+        <li><strong>Review warehouse QC and return options.</strong> If the agent offers quality-control photos, check the size tag, selected color and visible condition. If something differs from your order, check the seller and agent’s exchange deadlines before approving international shipment.</li>
+      </ol>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">iTaoBuy spreadsheet FAQ</h2>
+      <details>
+        <summary>What is this iTaoBuy spreadsheet?</summary>
+        <p>It is an independent shortlist of publicly listed HipobuyFind products with reference prices, item IDs and a checklist for researching a shopping-agent order.</p>
+      </details>
+      <details>
+        <summary>Where does “Buy it now” take me?</summary>
+        <p>It opens HipobuyFind. Find the product in that catalog and follow the listing to confirm the available options before choosing how to order.</p>
+      </details>
+      <details>
+        <summary>Can I order every listing through iTaoBuy?</summary>
+        <p>Check the original seller URL in iTaoBuy before paying. Compatibility, stock and delivery options depend on the seller, product and destination.</p>
+      </details>
+      <details>
+        <summary>What if the listed price or size is different?</summary>
+        <p>Use the price and variant shown on the current seller listing. Keep the item ID with your shortlist so you can confirm you are comparing the same product.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Independent shopping guide. Catalog data is sourced from <a href="https://hipobuyfind.com/">HipobuyFind</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const filters = document.getElementById('filters');
+      const query = document.getElementById('query');
+      const category = document.getElementById('category');
+      const sort = document.getElementById('sort');
+      const products = document.getElementById('products');
+      const result = document.getElementById('result');
+
+      const entries = Array.from(products.rows, (row) => ({
+        row,
+        keywords: `${row.cells[0].textContent} ${row.cells[2].textContent}`.toLowerCase(),
+        category: row.dataset.category,
+        price: Number(row.dataset.price)
+      }));
+
+      function updateCatalog() {
+        const terms = query.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        const selectedCategory = category.value;
+        const ordered = [...entries];
+
+        if (sort.value === 'asc') ordered.sort((a, b) => a.price - b.price);
+        if (sort.value === 'desc') ordered.sort((a, b) => b.price - a.price);
+
+        let count = 0;
+        for (const entry of ordered) {
+          const matchesCategory = !selectedCategory || entry.category === selectedCategory;
+          const matchesQuery = terms.every((term) => entry.keywords.includes(term));
+          entry.row.hidden = !(matchesCategory && matchesQuery);
+          if (!entry.row.hidden) count += 1;
+          products.append(entry.row);
+        }
+
+        result.textContent = count
+          ? `${count} of ${entries.length} listings shown`
+          : 'No matching listings. Try a shorter search or choose All categories.';
+      }
+
+      query.addEventListener('input', updateCatalog);
+      category.addEventListener('change', updateCatalog);
+      sort.addEventListener('change', updateCatalog);
+      filters.hidden = false;
+      result.hidden = false;
+      updateCatalog();
+    })();
+  </script>
+</body>
+</html>
